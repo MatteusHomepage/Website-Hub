@@ -1,6 +1,6 @@
 {
   "name": "Matteus Website Hub",
-  "short_name": "Hub",
+  "short_name": "Website Hub",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#0a0a0a",
