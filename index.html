@@ -6,11 +6,12 @@
     <title>Matteus Website Hub</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,26 +19,29 @@ body {
     min-height: 100vh;
     color: #fff;
     position: relative;
+    
 }
 
-body::before {
+     
+     
+        body::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);  
     z-index: 0;
 }
 
-#passwordOverlay {
+    #passwordOverlay {
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    background: transparent;
+    background: transparent;  
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -45,169 +49,171 @@ body::before {
     pointer-events: auto;
 }
 
-.password-container {
-    background: #ffffff;
-    padding: 40px 30px;
-    max-width: 480px;
-    width: 90%;
-    height: auto;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8);
-    border-left: 1px solid #e0e0e0;
-}
+        .password-container {
+            background: #ffffff;
+            padding: 80px 60px;
+            height: 100%;
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8);
+            border-left: 1px solid #e0e0e0;
+        }
 
+        .lock-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            color: #000;
+        }
 
-.lock-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-    opacity: 0.8;
-    color: #000;
-}
+        .password-title {
+            color: #000;
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: 600;
+        }
 
-.password-title {
-    color: #000;
-    margin-bottom: 15px;
-    font-size: 28px;
-    font-weight: 600;
-}
+        .password-subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
 
-.password-subtitle {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 14px;
-    line-height: 1.6;
-}
+        .password-input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-.password-input-wrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-}
+        #passwordInput {
+            width: 100%;
+            padding: 18px 50px 18px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            background: #f5f5f5;
+            color: #000;
+            outline: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
 
-#passwordInput {
-    width: 100%;
-    padding: 16px 50px 16px 16px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 2px solid #e0e0e0;
-    background: #f5f5f5;
-    color: #000;
-    outline: none;
-    transition: all 0.3s ease;
-}
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            color: #666;
+            transition: color 0.3s ease;
+        }
 
-.toggle-password {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    color: #666;
-    transition: color 0.3s ease;
-}
+        .toggle-password:hover {
+            color: #000;
+        }
 
-.toggle-password:hover {
-    color: #000;
-}
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+        }
 
-#passwordInput:focus {
-    border-color: #000;
-    background: #fff;
-}
+        #passwordInput:focus {
+            border-color: #000;
+            background: #fff;
+        }
 
-#passwordInput::placeholder {
-    color: #999;
-}
+        #passwordInput::placeholder {
+            color: #999;
+        }
 
-#passwordSubmit {
-    width: 100%;
-    padding: 16px;
-    background: #000;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
+        #passwordSubmit {
+            width: 100%;
+            padding: 18px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
 
-#passwordSubmit:hover {
-    background: #333;
-    transform: translateY(-2px);
-}
+        #passwordSubmit:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
 
-#passwordSubmit:active {
-    transform: translateY(0);
-}
+        #passwordSubmit:active {
+            transform: translateY(0);
+        }
 
-#passwordError {
-    color: #ef4444;
-    margin-top: 15px;
-    font-size: 14px;
-    min-height: 20px;
-    text-align: center;
-}
+        #passwordError {
+            color: #ef4444;
+            margin-top: 15px;
+            font-size: 14px;
+            min-height: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
 
-.protected-content {
-    max-width: 1200px;
-    margin: 80px auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 2;
-}
+        .protected-content {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
 
-.header {
-    text-align: center;
-    margin-bottom: 60px;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
 
-.header h1 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: #fff;
-}
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
 
-.header p {
-    font-size: 16px;
-    color: #999;
-}
+        .header p {
+            font-size: 18px;
+            color: #999;
+        }
 
-.lock-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 16px;
-    background: #fff;
-    color: #000;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    z-index: 3;
-}
+        .lock-button {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            background: #fff;
+            color: #000;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
 
+        .lock-button:hover {
+            background: #f5f5f5;
+        }
 
-.lock-button:hover {
-    background: #f5f5f5;
-}
+        #mainContent {
+            display: none;
+        }
 
-#mainContent {
-    display: none;
-}
-
-.confirm-overlay {
+     .confirm-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -222,17 +228,28 @@ body::before {
 
 .confirm-box {
     background: #fff;
-    padding: 30px;
+    padding: 40px;
     border-radius: 12px;
     text-align: center;
-    width: 90%;
     max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-box h3 {
+    color: #000;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.confirm-box p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
 }
 
 .confirm-buttons {
     display: flex;
     gap: 15px;
-    flex-wrap: wrap;
 }
 
 .confirm-buttons button {
@@ -243,6 +260,7 @@ body::before {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-cancel-confirm {
@@ -263,46 +281,48 @@ body::before {
     background: #d41a0d;
 }
 
-#lockClock {
+     #lockClock {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 24px;
+    left: 24px;
     z-index: 10000;
     color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #lockTime {
-    font-size: 28px;
+    font-size: 35px;
     font-weight: 600;
     line-height: 1;
 }
 
 #lockTimezone {
-    font-size: 12px;
+    font-size: 13px;
     opacity: 0.75;
-    margin-top: 4px;
+    margin-top: 6px;
 }
-     
-#lockLocation {
+
+    #lockLocation {
     position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 24px;
+    right: 540px; 
     z-index: 10000;
     color: white;
     font-size: 14px;
-    opacity: 0.85;
-    text-align: center;
+    opacity: 0.75;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 .website-items {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 24px;
+    padding: 0 40px;  /* space from edges so cards don't touch */
     margin-top: 40px;
-    justify-items: center;
 }
+
+
 
 .website-item {
     text-decoration: none;
@@ -310,7 +330,7 @@ body::before {
 }
 
 .website-card {
-    position: relative;
+    position: relative; 
     background: rgba(255, 255, 255, 0.05);
     padding: 20px;
     border-radius: 12px;
@@ -330,16 +350,18 @@ body::before {
 .device-icon {
     width: 18px;
     height: 18px;
-    color: #fff;
+    color: #fff; 
     opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
 .device-icon:hover {
-    opacity: 1;
+    opacity: 1; 
 }
 
+
 .website-card h3 {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 10px;
     color: #fff;
 }
@@ -353,24 +375,6 @@ body::before {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
-}
-     
-@media (max-width: 768px) {
-    .website-items {
-        grid-template-columns: 1fr;
-        margin: 20px auto;
-        overflow-y: auto;
-        padding: 0 10px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header h1 { font-size: 28px; }
-    .header p { font-size: 14px; }
-    .password-title { font-size: 22px; }
-    .password-subtitle { font-size: 12px; }
-    #lockTime { font-size: 24px; }
-    #lockTimezone { font-size: 11px; }
 }
 
 
