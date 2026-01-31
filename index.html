@@ -382,38 +382,47 @@
             margin: 0;
         }
 
-        @media only screen and (max-width: 1024px) {
-            .website-items {
-                grid-template-columns: 1fr !important;
-                padding: 0 20px;
-            }
+       @media (max-width: 1024px) {
+    .website-items {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
 
-            .password-container {
-                width: 100% !important;
-                padding: 40px 30px;
-                border-left: none;
-                box-shadow: none;
-            }
+    .password-container {
+        width: 100%;
+        padding: 40px 30px;
+        border-left: none;
+        box-shadow: none;
+    }
 
-            #lockLocation {
-                left: 50%;
-                transform: translateX(-50%);
-                right: auto;
-                bottom: 30px;
-                color: #000;
-                opacity: 0.4;
-                width: max-content;
-            }
+    #lockLocation {
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        bottom: 30px;
+        color: #000;
+        opacity: 0.4;
+        width: max-content;
+    }
 
-            .header h1 {
-                font-size: 32px;
-            }
+    .header h1 {
+        font-size: 32px;
+    }
 
-            .protected-content {
-                margin-top: 60px;
-                padding: 0 20px;
-            }
-        }
+    .top-buttons {
+        position: relative;
+        top: auto;
+        right: auto;
+        justify-content: center;
+        padding-top: 30px;
+        width: 100%;
+    }
+
+    .protected-content {
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+}
     </style>
 </head>
 <body>
