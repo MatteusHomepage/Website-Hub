@@ -190,9 +190,6 @@ body {
         }
 
         .lock-button {
-            position: fixed;
-            top: 30px;
-            right: 30px;
             padding: 12px 24px;
             background: #fff;
             color: #000;
@@ -318,7 +315,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
 
     gap: 24px;
-    padding: 0 40px;  /* space from edges so cards don't touch */
+    padding: 0 40px; 
     margin-top: 40px;
 }
 
@@ -377,7 +374,18 @@ body {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+.top-buttons {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    gap: 12px; 
+    z-index: 3;
+}
 
+.top-buttons .lock-button {
+    margin: 0;
+}
 
     </style>
 </head>
@@ -416,13 +424,24 @@ body {
     </div>
 
     <div id="mainContent">
-        <button class="lock-button" id="btnLock">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            Lock
-        </button>
+      <div class="top-buttons">
+    <button class="lock-button" id="btnInstall">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+            <path d="M12 5v14"></path>
+            <path d="M5 12l7 7 7-7"></path>
+        </svg>
+        Install
+    </button>
+
+    <button class="lock-button" id="btnLock">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        Lock
+    </button>
+</div>
+
         <div class="protected-content">
             <div class="header">
                 <h1>Matteus Aydin's Website Hub</h1>
