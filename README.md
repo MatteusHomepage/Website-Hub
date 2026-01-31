@@ -1,2 +1,2 @@
 # Website-Hub
-A hub with all my websites. Invites only.
+This is a website with all my websites and other projects. Access code required to access.
