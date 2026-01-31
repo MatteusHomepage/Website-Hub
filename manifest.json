@@ -1,0 +1,16 @@
+{
+  "name": "Matteus Website Hub",
+  "short_name": "Hub",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#000000",
+  "description": "A collection of all Matteus Aydin's websites",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
