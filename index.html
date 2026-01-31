@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Matteus Website Hub</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="manifest" href="manifest.json">
@@ -388,6 +388,39 @@ body {
 
 .top-buttons .lock-button {
     margin: 0;
+}
+
+        @media (max-width: 1024px) {
+    .website-items {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+    .password-container {
+        width: 100%;
+        padding: 40px 30px;
+        border-left: none;
+        box-shadow: none;
+    }
+
+    #lockLocation {
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        bottom: 30px;
+        color: #000;
+        opacity: 0.4;
+        width: max-content;
+    }
+
+    .header h1 {
+        font-size: 32px;
+    }
+
+    .protected-content {
+        margin-top: 60px;
+        padding: 0 20px;
+    }
 }
 
     </style>
