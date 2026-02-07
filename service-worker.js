@@ -1,32 +1,44 @@
-const CACHE_NAME = 'matteus-hub-cache-v4';
+const CACHE_NAME = 'matteus-hub-cache-v5';
+
+const BASE_PATH = '/Website-Hub/';
+
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/favicon.ico',
-  '/icon-192.png',
-  '/package.json',
-  '/manifest.json',
-  '/password.json',
-  '/server.js',
-  '/service-worker.js'
+  BASE_PATH,
+  BASE_PATH + 'index.html',
+  BASE_PATH + 'favicon.ico',
+  BASE_PATH + 'icon-192.png',
+  BASE_PATH + 'manifest.json'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
   );
 });
 
 self.addEventListener('fetch', event => {
+  // Only handle requests inside this app
+  if (!event.request.url.startsWith(self.location.origin + BASE_PATH)) {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
   );
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-    ))
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
+    )
   );
 });
