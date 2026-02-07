@@ -1,14 +1,19 @@
 {
   "name": "Matteus Website Hub",
   "short_name": "Website Hub",
-  "start_url": "/index.html",
+  "description": "A collection of all Matteus Aydin's websites",
+
+  "id": "/Website-Hub/",
+  "start_url": "/Website-Hub/",
+  "scope": "/Website-Hub/",
+
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#000000",
-  "description": "A collection of all Matteus Aydin's websites",
+
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "/Website-Hub/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
