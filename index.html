@@ -1,828 +1,1039 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Matteus Website Hub</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#000000" />
 
     <style>
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a url('https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg') 10% center/cover no-repeat fixed;
-            min-height: 100vh;
-            color: #fff;
-            position: relative;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #0a0a0a
+          url("https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg")
+          10% center/cover no-repeat fixed;
+        min-height: 100vh;
+        color: #fff;
+        position: relative;
+      }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 0;
-        }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 0;
+      }
 
-        #passwordOverlay {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            pointer-events: auto;
+      #passwordOverlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        pointer-events: auto;
+      }
+
+      .password-container {
+        background: #ffffff;
+        padding: 80px 60px;
+        height: 100%;
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8);
+        border-left: 1px solid #e0e0e0;
+      }
+
+      .lock-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        opacity: 0.8;
+        color: #000;
+      }
+
+      .password-title {
+        color: #000;
+        margin-bottom: 15px;
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .password-subtitle {
+        color: #666;
+        margin-bottom: 40px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .password-input-wrapper {
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      #passwordInput {
+        width: 100%;
+        padding: 18px 50px 18px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 2px solid #e0e0e0;
+        background: #f5f5f5;
+        color: #000;
+        outline: none;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        color: #666;
+        transition: color 0.3s ease;
+      }
+
+      .toggle-password:hover {
+        color: #000;
+      }
+
+      .toggle-password svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      #passwordInput:focus {
+        border-color: #000;
+        background: #fff;
+      }
+
+      #passwordInput::placeholder {
+        color: #999;
+      }
+
+      #passwordSubmit {
+        width: 100%;
+        padding: 18px;
+        background: #000;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      #passwordSubmit:hover {
+        background: #333;
+        transform: translateY(-2px);
+      }
+
+      #passwordSubmit:active {
+        transform: translateY(0);
+      }
+
+      #passwordError {
+        color: #ef4444;
+        margin-top: 15px;
+        font-size: 14px;
+        min-height: 20px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+      }
+
+      .protected-content {
+        max-width: 1200px;
+        margin: 80px auto;
+        padding: 0 40px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #fff;
+      }
+
+      .header p {
+        font-size: 18px;
+        color: #999;
+      }
+
+      .lock-button {
+        padding: 12px 24px;
+        background: #fff;
+        color: #000;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        z-index: 3;
+      }
+
+      .lock-button:hover {
+        background: #f5f5f5;
+      }
+
+      #mainContent {
+        display: none;
+      }
+
+      .confirm-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 10000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .confirm-box {
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .confirm-box h3 {
+        color: #000;
+        margin-bottom: 15px;
+        font-size: 22px;
+      }
+
+      .confirm-box p {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .confirm-buttons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .confirm-buttons button {
+        flex: 1;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-cancel-confirm {
+        background: #f5f5f5;
+        color: #000;
+      }
+
+      .btn-cancel-confirm:hover {
+        background: #e0e0e0;
+      }
+
+      .btn-lock-confirm {
+        background: red;
+        color: #fff;
+      }
+
+      .btn-lock-confirm:hover {
+        background: #d41a0d;
+      }
+
+      #lockClock {
+        position: fixed;
+        top: 24px;
+        left: 24px;
+        z-index: 10000;
+        color: white;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      #lockTime {
+        font-size: 35px;
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      #lockTimezone {
+        font-size: 13px;
+        opacity: 0.75;
+        margin-top: 6px;
+      }
+
+      #lockLocation {
+        position: fixed;
+        bottom: 24px;
+        right: 540px;
+        z-index: 10000;
+        color: white;
+        font-size: 14px;
+        opacity: 0.75;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .website-items {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        padding: 0 40px;
+        margin-top: 40px;
+      }
+
+      .website-item {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .website-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .device-icons {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        gap: 6px;
+      }
+
+      .device-icon {
+        width: 18px;
+        height: 18px;
+        color: #fff;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+      }
+
+      .device-icon:hover {
+        opacity: 1;
+      }
+
+      .website-card h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .website-card p {
+        font-size: 14px;
+        color: #ccc;
+      }
+
+      .website-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .top-buttons {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        display: flex;
+        gap: 12px;
+        z-index: 3;
+      }
+
+      .top-buttons .lock-button {
+        margin: 0;
+      }
+
+      @media (max-width: 1024px) {
+        .website-items {
+          grid-template-columns: 1fr;
+          padding: 0 20px 120px 20px;
         }
 
         .password-container {
-            background: #ffffff;
-            padding: 80px 60px;
-            height: 100%;
-            width: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8);
-            border-left: 1px solid #e0e0e0;
-        }
-
-        .lock-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            opacity: 0.8;
-            color: #000;
-        }
-
-        .password-title {
-            color: #000;
-            margin-bottom: 15px;
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        .password-subtitle {
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .password-input-wrapper {
-            position: relative;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        #passwordInput {
-            width: 100%;
-            padding: 18px 50px 18px 20px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-            background: #f5f5f5;
-            color: #000;
-            outline: none;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            color: #666;
-            transition: color 0.3s ease;
-        }
-
-        .toggle-password:hover {
-            color: #000;
-        }
-
-        .toggle-password svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        #passwordInput:focus {
-            border-color: #000;
-            background: #fff;
-        }
-
-        #passwordInput::placeholder {
-            color: #999;
-        }
-
-        #passwordSubmit {
-            width: 100%;
-            padding: 18px;
-            background: #000;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        #passwordSubmit:hover {
-            background: #333;
-            transform: translateY(-2px);
-        }
-
-        #passwordSubmit:active {
-            transform: translateY(0);
-        }
-
-        #passwordError {
-            color: #ef4444;
-            margin-top: 15px;
-            font-size: 14px;
-            min-height: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-        }
-
-        .protected-content {
-            max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .header h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .header p {
-            font-size: 18px;
-            color: #999;
-        }
-
-        .lock-button {
-            padding: 12px 24px;
-            background: #fff;
-            color: #000;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            z-index: 3;
-        }
-
-        .lock-button:hover {
-            background: #f5f5f5;
-        }
-
-        #mainContent {
-            display: none;
-        }
-
-        .confirm-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .confirm-box {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            max-width: 400px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .confirm-box h3 {
-            color: #000;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-
-        .confirm-box p {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .confirm-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .confirm-buttons button {
-            flex: 1;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-cancel-confirm {
-            background: #f5f5f5;
-            color: #000;
-        }
-
-        .btn-cancel-confirm:hover {
-            background: #e0e0e0;
-        }
-
-        .btn-lock-confirm {
-            background: red;
-            color: #fff;
-        }
-
-        .btn-lock-confirm:hover {
-            background: #d41a0d;
-        }
-
-        #lockClock {
-            position: fixed;
-            top: 24px;
-            left: 24px;
-            z-index: 10000;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        #lockTime {
-            font-size: 35px;
-            font-weight: 600;
-            line-height: 1;
-        }
-
-        #lockTimezone {
-            font-size: 13px;
-            opacity: 0.75;
-            margin-top: 6px;
+          width: 100%;
+          padding: 40px 30px;
+          border-left: none;
+          box-shadow: none;
         }
 
         #lockLocation {
-            position: fixed;
-            bottom: 24px;
-            right: 540px;
-            z-index: 10000;
-            color: white;
-            font-size: 14px;
-            opacity: 0.75;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          display: none;
         }
 
-        .website-items {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            padding: 0 40px;
-            margin-top: 40px;
-        }
-
-        .website-item {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .website-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .device-icons {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            gap: 6px;
-        }
-
-        .device-icon {
-            width: 18px;
-            height: 18px;
-            color: #fff;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .device-icon:hover {
-            opacity: 1;
-        }
-
-        .website-card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .website-card p {
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .website-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
+        .header h1 {
+          font-size: 32px;
         }
 
         .top-buttons {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            gap: 12px;
-            z-index: 3;
+          position: relative;
+          top: auto;
+          right: auto;
+          justify-content: center;
+          padding-top: 30px;
+          width: 100%;
         }
 
-        .top-buttons .lock-button {
-            margin: 0;
+        .protected-content {
+          margin-top: 30px;
+          padding: 0 20px;
         }
+      }
+      @media all and (display-mode: standalone) {
+        #btnInstall {
+          display: none !important;
+        }
+      }
 
-      @media (max-width: 1024px) {
-    .website-items {
-        grid-template-columns: 1fr;
-        padding: 0 20px 120px 20px;
-    }
-
-    .password-container {
-        width: 100%;
-        padding: 40px 30px;
-        border-left: none;
-        box-shadow: none;
-    }
-
-    #lockLocation {
-        display: none;
-    }
-
-    .header h1 {
-        font-size: 32px;
-    }
-
-    .top-buttons {
-        position: relative;
-        top: auto;
-        right: auto;
-        justify-content: center;
-        padding-top: 30px;
-        width: 100%;
-    }
-
-    .protected-content {
-        margin-top: 30px;
-        padding: 0 20px;
-    }
-}
-        @media all and (display-mode: standalone) {
-    #btnInstall {
-        display: none !important;
-    }
-}
+      .website-card p {
+        transition: opacity 0.25s ease;
+      }
     </style>
-</head>
-<body>
-    <div id="passwordOverlay" style="display: flex;">
-     <div id="lockClock">
-    <div id="lockTime">00:00</div>
-    <div id="lockTimezone">UTC</div>
-</div>
-<div id="lockLocation">
-    Indonesia · Bali
-</div>
+  </head>
+  <body>
+    <div id="passwordOverlay" style="display: flex">
+      <div id="lockClock">
+        <div id="lockTime">00:00</div>
+        <div id="lockTimezone">UTC</div>
+      </div>
+      <div id="lockLocation">Indonesia · Bali</div>
 
-        <div class="password-container">
-            <div class="lock-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-             Locked
-            </div>
-            <h2 class="password-title">Matteus Aydin's Hub</h2>
-            <p class="password-subtitle">Access to Matteus Aydin's collection of websites and projects. Please enter the password to continue.</p>
-            <div class="password-input-wrapper">
-                <input type="password" id="passwordInput" placeholder="Enter password">
-                <button type="button" class="toggle-password" id="togglePassword">
-                    <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                </button>
-            </div>
-            <button id="passwordSubmit">Unlock</button>
-            <div id="passwordError"></div>
+      <div class="password-container">
+        <div class="lock-icon">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Locked
         </div>
+        <h2 class="password-title">Matteus Aydin's Hub</h2>
+        <p class="password-subtitle">
+          Access to Matteus Aydin's collection of websites and projects. Please
+          enter the password to continue.
+        </p>
+        <div class="password-input-wrapper">
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter password"
+          />
+          <button type="button" class="toggle-password" id="togglePassword">
+            <svg
+              id="eyeIcon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+        <button id="passwordSubmit">Unlock</button>
+        <div id="passwordError"></div>
+      </div>
     </div>
 
     <div id="mainContent">
       <div class="top-buttons">
-    <button class="lock-button" id="btnInstall">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+        <button class="lock-button" id="btnInstall">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-right: 6px;
+            "
+          >
             <path d="M12 5v14"></path>
             <path d="M5 12l7 7 7-7"></path>
-        </svg>
-        Install
-    </button>
+          </svg>
+          Install
+        </button>
 
-    <button class="lock-button" id="btnLock">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+        <button class="lock-button" id="btnLock">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-right: 6px;
+            "
+          >
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-        </svg>
-        Lock
-    </button>
-</div>
+          </svg>
+          Lock
+        </button>
+      </div>
 
-        <div class="protected-content">
-            <div class="header">
-                <h1>Matteus Aydin's Website Hub</h1>
-                <p>Welcome to my collection of websites and projects</p>
-            </div>
+      <div class="protected-content">
+        <div class="header">
+          <h1>Matteus Aydin's Website Hub</h1>
+          <p>Welcome to my collection of websites and projects</p>
         </div>
+      </div>
 
-     <div class="website-items">
-   
-    <a href="https://matteushomepage.github.io/Matteus-Homepage/" target="_blank" class="website-item">
-        <div class="website-card">
-             <div class="device-icons">
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5h18v12H3z"></path>
-            <path d="M2 17h20"></path>
-        </svg>
-    </div>
+      <div class="website-items">
+        <a
+          href="https://matteushomepage.github.io/Matteus-Homepage/"
+          target="_blank"
+          class="website-item"
+          data-hover="A customized google homepage."
+        >
+          <div class="website-card">
+            <div class="device-icons">
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 5h18v12H3z"></path>
+                <path d="M2 17h20"></path>
+              </svg>
+            </div>
 
             <h3>Matteus Home Page</h3>
-            <p>A customized google homepage.</p>
-        </div>
-    </a>
+            <p>Hover to view description.</p>
+          </div>
+        </a>
 
-   
-    <a href="https://goteborg-skolor-pavelundskolan-elevportal.onrender.com/" target="_blank" class="website-item">
-        <div class="website-card">
-         <div class="device-icons">
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5h18v12H3z"></path>
-            <path d="M2 17h20"></path>
-        </svg>
-    </div>
+        <a
+          href="https://goteborg-skolor-pavelundskolan-elevportal.onrender.com/"
+          target="_blank"
+          class="website-item"
+          data-hover="A messaging website disguised as a school page."
+        >
+          <div class="website-card">
+            <div class="device-icons">
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 5h18v12H3z"></path>
+                <path d="M2 17h20"></path>
+              </svg>
+            </div>
             <h3>Chatting Website</h3>
-            <p>A messaging website disguised as a school page.</p>
-        </div>
-    </a>
+            <p>Hover to view description.</p>
+          </div>
+        </a>
 
-    
-    <a href="https://matteushomepage.github.io/To-Do-List/" target="_blank" class="website-item">
-        <div class="website-card">
-         <div class="device-icons">
-        
+        <a
+          href="https://matteushomepage.github.io/To-Do-List/"
+          target="_blank"
+          class="website-item"
+          data-hover="A simple to do list with dark and light mode."
+        >
+          <div class="website-card">
+            <div class="device-icons">
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 5h18v12H3z"></path>
+                <path d="M2 17h20"></path>
+              </svg>
 
-       
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5h18v12H3z"></path>
-            <path d="M2 17h20"></path>
-        </svg>
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
+                <circle cx="12" cy="18" r="1"></circle>
+              </svg>
 
-        
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
-            <circle cx="12" cy="18" r="1"></circle>
-        </svg>
-          
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-        </svg>
-    </div>
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              </svg>
+            </div>
 
             <h3>To-Do List</h3>
-            <p>A simple to do list with dark and light mode.</p>
-        </div>
-    </a>
+            <p>Hover to view description.</p>
+          </div>
+        </a>
 
-         <a href="https://matteushomepage.github.io/Notes-Matteus/" target="_blank" class="website-item">
-        <div class="website-card">
-         <div class="device-icons">
-        
+        <a
+          href="https://matteushomepage.github.io/Notes-Matteus/"
+          target="_blank"
+          class="website-item"
+          data-hover="A simple notes app with dark and light mode."
+        >
+          <div class="website-card">
+            <div class="device-icons">
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 5h18v12H3z"></path>
+                <path d="M2 17h20"></path>
+              </svg>
 
-       
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5h18v12H3z"></path>
-            <path d="M2 17h20"></path>
-        </svg>
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
+                <circle cx="12" cy="18" r="1"></circle>
+              </svg>
 
-        
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
-            <circle cx="12" cy="18" r="1"></circle>
-        </svg>
-          
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-        </svg>
-    </div>
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              </svg>
+            </div>
 
             <h3>Notes</h3>
-            <p>A simple notes app with dark and light mode.</p>
-        </div>
-    </a>
+            <p>Hover to view description.</p>
+          </div>
+        </a>
 
-<a href="https://matteushomepage.github.io/Recept-Guiden/" target="_blank" class="website-item">
-        <div class="website-card">
-         <div class="device-icons">
-        
+        <a
+          href="https://matteushomepage.github.io/Recept-Guiden/"
+          target="_blank"
+          class="website-item"
+          data-hover="A website where you can type in ingredients and it will recommend
+              you meals."
+        >
+          <div class="website-card">
+            <div class="device-icons">
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 5h18v12H3z"></path>
+                <path d="M2 17h20"></path>
+              </svg>
 
-       
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5h18v12H3z"></path>
-            <path d="M2 17h20"></path>
-        </svg>
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
+                <circle cx="12" cy="18" r="1"></circle>
+              </svg>
 
-        
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
-            <circle cx="12" cy="18" r="1"></circle>
-        </svg>
-          
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-        </svg>
-    </div>
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              </svg>
+            </div>
 
             <h3>Recept Guiden</h3>
-            <p>A website where you can type in ingredients and it will recommend you meals.</p>
-        </div>
-    </a>
+            <p>Hover to view description.</p>
+          </div>
+        </a>
 
+        <a
+          href="#"
+          target="_blank"
+          class="website-item"
+          data-hover="This website. A collection of all my websites."
+        >
+          <div class="website-card">
+            <div class="device-icons">
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 5h18v12H3z"></path>
+                <path d="M2 17h20"></path>
+              </svg>
 
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
+                <circle cx="12" cy="18" r="1"></circle>
+              </svg>
 
-
-         
-  <a href="#" target="_blank" class="website-item">
-        <div class="website-card">
-         <div class="device-icons">
-        
-
-       
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5h18v12H3z"></path>
-            <path d="M2 17h20"></path>
-        </svg>
-
-        
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
-            <circle cx="12" cy="18" r="1"></circle>
-        </svg>
-          
-        <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-        </svg>
-    </div>
+              <svg
+                class="device-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              </svg>
+            </div>
 
             <h3>Matteus Website Hub</h3>
-            <p>This website. A collection of all my websites</p>
-        </div>
-    </a>
-
-
-      
-</div>
-
+            <p>Hover to view description.</p>
+          </div>
+        </a>
+      </div>
     </div>
 
- 
     <div class="confirm-overlay" id="confirmOverlay">
-    <div class="confirm-box">
+      <div class="confirm-box">
         <h3>Lock Site?</h3>
-        <p>Are you sure you want to lock the site? You'll need to enter the password again.</p>
+        <p>
+          Are you sure you want to lock the site? You'll need to enter the
+          password again.
+        </p>
         <div class="confirm-buttons">
-            <button class="btn-cancel-confirm" id="btnCancelLock">Cancel</button>
-            <button class="btn-lock-confirm" id="btnConfirmLock">Lock</button>
+          <button class="btn-cancel-confirm" id="btnCancelLock">Cancel</button>
+          <button class="btn-lock-confirm" id="btnConfirmLock">Lock</button>
         </div>
+      </div>
     </div>
-</div>
 
-
-
-
- 
     <script>
-        let CORRECT_PASSWORD = "Password Fetch Has Failed";
-        let REMOTE_PASSWORD = null;
+      let CORRECT_PASSWORD = "Password Fetch Has Failed";
+      let REMOTE_PASSWORD = null;
 
-        const fetchRemotePassword = async () => {
-            try {
-                const response = await fetch('password.json?t=' + Date.now());
-                const data = await response.json();
-                REMOTE_PASSWORD = data.password;
-                CORRECT_PASSWORD = data.password;
-                return data.password;
-            } catch (error) {
-                console.error("Failed to fetch remote password:", error);
-                return CORRECT_PASSWORD;
-            }
+      const fetchRemotePassword = async () => {
+        try {
+          const response = await fetch("password.json?t=" + Date.now());
+          const data = await response.json();
+          REMOTE_PASSWORD = data.password;
+          CORRECT_PASSWORD = data.password;
+          return data.password;
+        } catch (error) {
+          console.error("Failed to fetch remote password:", error);
+          return CORRECT_PASSWORD;
+        }
+      };
+
+      const setPassword = (value) => {
+        localStorage.setItem("sitePassword", value);
+      };
+
+      const getPassword = () => {
+        return localStorage.getItem("sitePassword") || "";
+      };
+
+      const deletePassword = () => {
+        localStorage.removeItem("sitePassword");
+      };
+
+      const checkAuth = async () => {
+        const passwordOverlay = document.getElementById("passwordOverlay");
+        const savedPassword = getPassword();
+        const mainContent = document.getElementById("mainContent");
+
+        await fetchRemotePassword();
+
+        if (savedPassword && savedPassword === CORRECT_PASSWORD) {
+          passwordOverlay.style.display = "none";
+          mainContent.style.display = "block";
+          document.body.style.background =
+            "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg') center/cover no-repeat fixed";
+        } else {
+          if (savedPassword) {
+            deletePassword();
+          }
+          passwordOverlay.style.display = "flex";
+          mainContent.style.display = "none";
+          document.body.style.background =
+            "#0a0a0a url('https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg') left center/cover no-repeat fixed";
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const passwordOverlay = document.getElementById("passwordOverlay");
+        const passwordInput = document.getElementById("passwordInput");
+        const passwordSubmit = document.getElementById("passwordSubmit");
+        const passwordError = document.getElementById("passwordError");
+        const mainContent = document.getElementById("mainContent");
+        const btnLock = document.getElementById("btnLock");
+        const confirmOverlay = document.getElementById("confirmOverlay");
+        const btnCancelLock = document.getElementById("btnCancelLock");
+        const btnConfirmLock = document.getElementById("btnConfirmLock");
+        const handlePasswordSubmit = () => {
+          const enteredPassword = passwordInput.value;
+
+          if (enteredPassword === CORRECT_PASSWORD) {
+            setPassword(enteredPassword);
+            passwordOverlay.style.display = "none";
+            passwordError.textContent = "";
+            mainContent.style.display = "block";
+            document.body.style.background =
+              "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg') center/cover no-repeat fixed";
+
+            passwordInput.value = "";
+          } else {
+            passwordError.textContent = "Incorrect password. Please try again.";
+            passwordInput.value = "";
+            setTimeout(() => {
+              passwordError.textContent = "";
+            }, 1000);
+          }
         };
 
-        const setPassword = (value) => {
-            localStorage.setItem("sitePassword", value);
-        };
+        passwordSubmit.addEventListener("click", handlePasswordSubmit);
 
-        const getPassword = () => {
-            return localStorage.getItem("sitePassword") || "";
-        };
+        passwordInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            handlePasswordSubmit();
+          }
+        });
 
-        const deletePassword = () => {
-            localStorage.removeItem("sitePassword");
-        };
+        checkAuth();
+      });
 
-        const checkAuth = async () => {
-            const passwordOverlay = document.getElementById("passwordOverlay");
-            const savedPassword = getPassword();
-            const mainContent = document.getElementById("mainContent");
+      const togglePassword = document.getElementById("togglePassword");
+      const eyeIcon = document.getElementById("eyeIcon");
 
-            await fetchRemotePassword();
+      togglePassword.addEventListener("click", () => {
+        const passwordInput = document.getElementById("passwordInput");
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
 
-      if (savedPassword && savedPassword === CORRECT_PASSWORD) {
-    passwordOverlay.style.display = "none";
-    mainContent.style.display = "block";
-    document.body.style.background = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg') center/cover no-repeat fixed";
+        if (type === "text") {
+          eyeIcon.innerHTML =
+            '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+        } else {
+          eyeIcon.innerHTML =
+            '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+        }
+      });
 
-} else {
-    if (savedPassword) {
+      btnLock.addEventListener("click", () => {
+        confirmOverlay.style.display = "flex";
+      });
+
+      btnCancelLock.addEventListener("click", () => {
+        confirmOverlay.style.display = "none";
+      });
+
+      btnConfirmLock.addEventListener("click", () => {
+        confirmOverlay.style.display = "none";
         deletePassword();
-    }
-    passwordOverlay.style.display = "flex";
-    mainContent.style.display = "none";
-    document.body.style.background = "#0a0a0a url('https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg') left center/cover no-repeat fixed";
-}
-        };
+        checkAuth();
+      });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const passwordOverlay = document.getElementById("passwordOverlay");
-            const passwordInput = document.getElementById("passwordInput");
-            const passwordSubmit = document.getElementById("passwordSubmit");
-            const passwordError = document.getElementById("passwordError");
-            const mainContent = document.getElementById("mainContent");
-            const btnLock = document.getElementById("btnLock");
-const confirmOverlay = document.getElementById("confirmOverlay");
-const btnCancelLock = document.getElementById("btnCancelLock");
-const btnConfirmLock = document.getElementById("btnConfirmLock");
-            const handlePasswordSubmit = () => {
-                const enteredPassword = passwordInput.value;
+      const updateLockClock = () => {
+        const now = new Date();
 
-                if (enteredPassword === CORRECT_PASSWORD) {
-                    setPassword(enteredPassword);
-                    passwordOverlay.style.display = "none";
-                    passwordError.textContent = "";
-                    mainContent.style.display = "block";
-                   document.body.style.background = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.ctfassets.net/wvgaszxkj2ha/6PElvtIyCGXSo8zdUCZ3XS/8f172a13ae3a8f9a898010c4f2ef64fe/indonesien-bali-kelingking-strand-900x600.jpg') center/cover no-repeat fixed";
-
-                    passwordInput.value = "";
-                } else {
-                    passwordError.textContent = "Incorrect password. Please try again.";
-                    passwordInput.value = "";
-                    setTimeout(() => {
-                        passwordError.textContent = "";
-                    }, 1000);
-                }
-            };
-
-            passwordSubmit.addEventListener("click", handlePasswordSubmit);
-
-            passwordInput.addEventListener("keydown", (e) => {
-                if (e.key === "Enter") {
-                    handlePasswordSubmit();
-                }
-            });
-
-            checkAuth();
+        const time = now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
         });
 
-        const togglePassword = document.getElementById("togglePassword");
-        const eyeIcon = document.getElementById("eyeIcon");
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-        togglePassword.addEventListener("click", () => {
-            const passwordInput = document.getElementById("passwordInput");
-            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-            passwordInput.setAttribute("type", type);
-            
-            if (type === "text") {
-                eyeIcon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
-            } else {
-                eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
-            }
+        const timeEl = document.getElementById("lockTime");
+        const tzEl = document.getElementById("lockTimezone");
+
+        if (timeEl && tzEl) {
+          timeEl.textContent = time;
+          tzEl.textContent = timezone;
+        }
+      };
+
+      setInterval(updateLockClock, 1000);
+      updateLockClock();
+
+      btnLock.addEventListener("click", () => {
+        confirmOverlay.style.display = "flex";
+
+        btnConfirmLock.focus();
+      });
+
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/service-worker.js");
+      }
+
+      let deferredPrompt;
+      const btnInstall = document.getElementById("btnInstall");
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        btnInstall.style.display = "inline-block";
+      });
+
+      btnInstall.addEventListener("click", async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          btnInstall.style.display = "none";
+        }
+      });
+
+      const items = document.querySelectorAll(".website-item");
+
+      items.forEach((item) => {
+        const p = item.querySelector("p");
+        const originalText = p.textContent;
+
+        item.addEventListener("mouseenter", () => {
+          p.style.opacity = "0";
+
+          setTimeout(() => {
+            p.textContent = item.dataset.hover;
+            p.style.opacity = "1";
+          }, 150);
         });
 
-        btnLock.addEventListener("click", () => {
-    confirmOverlay.style.display = "flex";
-});
-
-btnCancelLock.addEventListener("click", () => {
-    confirmOverlay.style.display = "none";
-});
-
-btnConfirmLock.addEventListener("click", () => {
-    confirmOverlay.style.display = "none";
-    deletePassword();
-    checkAuth();
-});
-
-const updateLockClock = () => {
-    const now = new Date();
-
-    const time = now.toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    });
-
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    const timeEl = document.getElementById("lockTime");
-    const tzEl = document.getElementById("lockTimezone");
-
-    if (timeEl && tzEl) {
-        timeEl.textContent = time;
-        tzEl.textContent = timezone;
-    }
-};
-
-setInterval(updateLockClock, 1000);
-updateLockClock();
-
-btnLock.addEventListener("click", () => {
-    confirmOverlay.style.display = "flex";
-
-  
-    btnConfirmLock.focus();
-});
-
-        if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js');
-}
-
-let deferredPrompt;
-const btnInstall = document.getElementById('btnInstall');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    btnInstall.style.display = 'inline-block';
-});
-
-btnInstall.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        btnInstall.style.display = 'none';
-    }
-});
-
-     
+        item.addEventListener("mouseleave", () => {
+          p.textContent = originalText;
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
