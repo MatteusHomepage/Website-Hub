@@ -429,7 +429,16 @@
       }
 
       .website-card p {
-        transition: opacity 0.25s ease;
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+          opacity 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      .website-card p.changing {
+        opacity: 0;
+        transform: translateY(6px);
       }
     </style>
   </head>
@@ -1019,19 +1028,26 @@
 
       items.forEach((item) => {
         const p = item.querySelector("p");
-        const originalText = p.textContent;
 
-        item.addEventListener("mouseenter", () => {
-          p.style.opacity = "0";
+        if (!item.dataset.original) {
+          item.dataset.original = p.textContent;
+        }
+
+        function changeText(newText) {
+          p.classList.add("changing");
 
           setTimeout(() => {
-            p.textContent = item.dataset.hover;
-            p.style.opacity = "1";
-          }, 150);
+            p.textContent = newText;
+            p.classList.remove("changing");
+          }, 200);
+        }
+
+        item.addEventListener("pointerenter", () => {
+          changeText(item.dataset.hover || "");
         });
 
-        item.addEventListener("mouseleave", () => {
-          p.textContent = originalText;
+        item.addEventListener("pointerleave", () => {
+          changeText(item.dataset.original);
         });
       });
     </script>
