@@ -1,4 +1,4 @@
-const CACHE_NAME = 'matteus-hub-cache-v9';
+const CACHE_NAME = 'matteus-hub-cache-v10';
 
 const BASE_PATH = '/Website-Hub/';
 
